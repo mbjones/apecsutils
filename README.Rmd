@@ -1,0 +1,75 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# apecsutils
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of `apecsutils` is to make some simple data management tasks for APECS simpler.
+
+Currently it helps with:
+
+- checking access permissions on data packages
+- adding access permissions to data packages
+
+## Installation
+
+You can install the development version of `apecsutils` from GitHub using:
+
+```{r eval=FALSE}
+remotes::install_github("mbjones/apecsutils")
+```
+
+## Example
+
+This is a basic example which shows you how to solve the common problem when a
+member of the APECS lab does not have sufficient permissions to manage a data package.
+
+Note, for any of these to work, you need to be logged in to the KNB repository,
+and set your access token in the R `options` so R can identify you. You can get 
+this token from your KNB profile settings. Paste the token for into the console, and not
+into a script, as you don't want to save this, and you should treat it like a secret password.
+
+```{r set_token, eval=FALSE}
+options(dataone_token = "eyJhbGciOiJSUzI1NiJ9.eyJzdW...continuing_as_a_very_long_random_string")
+```
+
+Once we are logged in, we can check that both the lab leader and the SME Group has `changePermission` permission
+on the package, and then we update the package to add these permissions.
+
+```{r check_access, eval=FALSE}
+library(apecsutils)
+
+# Identify a package by its identifier (pid) from the KNB repository
+pid <- "resource_map_urn:uuid:22896aa3-38fd-4baa-888f-cea4b908309c"
+
+# These are the identifiers for the lab leader and the lab group
+ginny <- "http://orcid.org/0000-0002-7538-7081"
+sme_group <- "CN=Sustainable Marine Ecosystems in Alaska Lab,DC=dataone,DC=org"
+
+# Check if both ginny and sme_group have all permissions
+check_package_access(pid, subjects = c(ginny, sme_group), permissions = c("read", "write", "changePermission"))
+```
+Finally, you can update the package to allow full access (or whatever access needed) by Ginny and the Group, and show that the results have changed by checking the status again.
+
+```{r set_access, eval=FALSE}
+# Add permissions for both ginny and sme_group at all levels of access (YMMV)
+add_package_access(pid, subjects = c(ginny, sme_group), permissions = c("read", "write", "changePermission"))
+
+# Check if both ginny and sme_group have all permissions now
+check_package_access(pid, subjects = c(ginny, sme_group), permissions = c("read", "write", "changePermission"))
+```
+

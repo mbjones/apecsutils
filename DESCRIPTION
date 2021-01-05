@@ -1,6 +1,6 @@
 Package: apecsutils
 Title: Utility Functions for APECS Project Data Management
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person(given = "Matthew",
            family = "Jones",
@@ -24,6 +24,4 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Suggests: 
-    spelling
 Language: en-US
