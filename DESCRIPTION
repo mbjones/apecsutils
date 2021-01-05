@@ -6,12 +6,13 @@ Authors@R:
            family = "Jones",
            role = c("aut", "cre"),
            email = "jones@nceas.ucsb.edu",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = c(ORCID = "0000-0003-0077-4738"))
 Description: Utility functions provide dtaa management wrappers for simple operations.
 License: Apache License (>= 2.0)
 Depends:
     R (>= 3.2.3)
 Imports:
+    arcticdatautils,
     dataone,
     datapack,
     dplyr,
