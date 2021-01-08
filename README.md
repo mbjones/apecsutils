@@ -21,6 +21,7 @@ You can install the development version of `apecsutils` from GitHub
 using:
 
 ``` r
+remotes::install_github("NCEAS/arcticdatautils")
 remotes::install_github("mbjones/apecsutils")
 ```
 
